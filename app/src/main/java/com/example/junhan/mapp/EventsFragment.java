@@ -91,8 +91,8 @@ public class EventsFragment extends Fragment {
                 sectioner.put(dateStr,newList);
             }
         }
+//        for (String key : sectioner)
 
-        for ()
         HeaderRecyclerViewSection firstSection = new HeaderRecyclerViewSection("First Section", exampleList);
         HeaderRecyclerViewSection secondSection = new HeaderRecyclerViewSection("Second Section", exampleList);
         HeaderRecyclerViewSection thirdSection = new HeaderRecyclerViewSection("Third Section", exampleList);
