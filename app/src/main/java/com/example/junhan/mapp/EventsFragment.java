@@ -36,7 +36,7 @@ public class EventsFragment extends Fragment {
 
         exampleList.add(new EventsItem("Event 1", date2, date2, "LT1", 10, ""));
         exampleList.add(new EventsItem("Event 2", date1, date1, "CC14", 5, ""));
-        exampleList.add(new EventsItem("Event 3", date2, date2, "LT5", 200, ""));
+        exampleList.add(new EventsItem("Event 3", date2, date2, "LT5", 99, ""));
         exampleList.add(new EventsItem("Event 1", date2, date2, "LT2", 3, ""));
 
         return exampleList;
