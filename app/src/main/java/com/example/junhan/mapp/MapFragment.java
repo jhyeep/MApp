@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
+//TODO: rip map
 public class MapFragment extends Fragment {
     @Nullable
     @Override
