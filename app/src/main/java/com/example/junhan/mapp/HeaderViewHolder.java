@@ -8,6 +8,6 @@ public class HeaderViewHolder extends RecyclerView.ViewHolder{
     public TextView headerTitle;
     public HeaderViewHolder(View itemView) {
         super(itemView);
-        headerTitle = (TextView)itemView.findViewById(R.id.eventsHeader);
+        headerTitle = itemView.findViewById(R.id.eventsHeader);
     }
 }

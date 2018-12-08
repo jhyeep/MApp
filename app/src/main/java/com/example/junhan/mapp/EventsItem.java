@@ -14,7 +14,7 @@ public class EventsItem {
     public EventsItem(String name, Date dateStart, Date dateEnd, String location, int attendance, String desc){
 
         this.name = name;
-        this.dateStart = dateStart; //stores both date and time, refer to EventsFragment and search 'DataFormat' for more info on how to create a Date
+        this.dateStart = dateStart; //stores both date and time, refer to DataCollector for usage
         this.dateEnd = dateEnd;
         this.attendance = attendance;
         this.location = location;
