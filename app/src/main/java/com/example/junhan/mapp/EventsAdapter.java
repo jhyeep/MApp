@@ -12,21 +12,32 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+// this class is useless
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ExampleViewHolder> {
 
     Context mContext;
     ArrayList<EventsItem> mExampleList;
+    private onItemCLickListener mListener;
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
-//        public ImageView mImageView;
         public TextView mTextView1;
         public TextView mTextView2;
 
-        public ExampleViewHolder(@NonNull View itemView) {
+        public ExampleViewHolder(@NonNull View itemView, final onItemCLickListener listener) {
             super(itemView);
-//            mImageView = itemView.findViewById(R.id.imageView);
             mTextView1= itemView.findViewById(R.id.textView);
             mTextView2 = itemView.findViewById(R.id.textView2);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -39,7 +50,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ExampleVie
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.event_item, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v);
+        ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
         return evh;
     }
 
@@ -52,11 +63,20 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ExampleVie
 
         holder.mTextView1.setText(currentItem.getName() + " on " + convDate.format(currentItem.getDateStart()));
         holder.mTextView2.setText(convTime.format(currentItem.getDateStart()) + " - " + convTime.format(currentItem.getDateEnd()));
-//        holder.mImageView.setImageResource(currentItem.getImageResource());
     }
 
     @Override
     public int getItemCount() {
         return mExampleList.size();
     }
+
+    public interface onItemCLickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(onItemCLickListener listener) {
+        mListener = listener;
+    }
+
 }
+

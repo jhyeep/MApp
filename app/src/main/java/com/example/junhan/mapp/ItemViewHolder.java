@@ -9,10 +9,22 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
     public TextView mTextView2;
     public TextView mTextViewAttend;
 
-    public ItemViewHolder(View itemView) {
+    public ItemViewHolder(View itemView, final HeaderRecyclerViewSection.onItemClickListener listener) {
         super(itemView);
         mTextView1= itemView.findViewById(R.id.textView);
         mTextView2 = itemView.findViewById(R.id.textView2);
         mTextViewAttend = itemView.findViewById(R.id.TextAttend);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null){
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
+                    }
+                }
+            }
+        });
     }
 }

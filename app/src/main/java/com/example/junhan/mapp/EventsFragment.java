@@ -1,5 +1,6 @@
 package com.example.junhan.mapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TreeMap;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
@@ -19,17 +21,11 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapt
 
 public class EventsFragment extends Fragment {
 
-    ArrayList<EventsItem> eventList = new ArrayList<>();
+    TreeMap<String, ArrayList<EventsItem>> sectioner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            eventList = DataCollector.getData();
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     @Nullable
@@ -38,7 +34,6 @@ public class EventsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
-        TreeMap<String, ArrayList<EventsItem>> sectioner = null;
         try {
             sectioner = DataCollector.getSortedData();
         } catch (ParseException e) {
@@ -46,14 +41,31 @@ public class EventsFragment extends Fragment {
         }
 
         SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
-        for (String key : sectioner.keySet()) {
-            sectionAdapter.addSection(new HeaderRecyclerViewSection(key, sectioner.get(key)));
+
+        final ArrayList<EventsItem> posTracker = new ArrayList<>();
+        Date currentDate = new Date();
+        for (final String key : sectioner.keySet()) {
+            posTracker.add(new EventsItem(key, currentDate, currentDate, "", 0, ""));
+            for (EventsItem value : sectioner.get(key)) posTracker.add(value);
+
+            final HeaderRecyclerViewSection sec = new HeaderRecyclerViewSection(key, sectioner.get(key));
+            sectionAdapter.addSection(sec);
+            sec.setOnItemClickListener(new HeaderRecyclerViewSection.onItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+//                    EventsItem selectedEvent = sec.eventList.get(position);
+                    Intent intent = new Intent(getActivity(), EventDetails.class);
+                    intent.putExtra("CURRENT_ITEM", posTracker.get(position).getDesc());
+                    startActivity(intent);
+                }
+            });
         }
 
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(sectionAdapter);
+
 
         return view;
     }

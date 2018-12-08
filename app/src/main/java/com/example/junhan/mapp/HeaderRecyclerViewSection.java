@@ -1,6 +1,5 @@
 package com.example.junhan.mapp;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -12,12 +11,13 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 public class HeaderRecyclerViewSection extends StatelessSection{
     private static final String TAG = HeaderRecyclerViewSection.class.getSimpleName();
     private String title;
-    Context mContext;
-    private ArrayList<EventsItem> eventList;
-    HeaderRecyclerViewSection(String title, ArrayList<EventsItem> list) {
+    public ArrayList<EventsItem> eventList;
+    private onItemClickListener mListener;
+
+    HeaderRecyclerViewSection(String title, ArrayList<EventsItem> eventList) {
         super(R.layout.events_header, R.layout.event_item);
         this.title = title;
-        this.eventList = list;
+        this.eventList = eventList;
     }
     @Override
     public int getContentItemsTotal() {
@@ -25,7 +25,7 @@ public class HeaderRecyclerViewSection extends StatelessSection{
     }
     @Override
     public RecyclerView.ViewHolder getItemViewHolder(View view) {
-        return new ItemViewHolder(view);
+        return new ItemViewHolder(view, mListener);
     }
     @Override
     public RecyclerView.ViewHolder getHeaderViewHolder(View view) {
@@ -49,4 +49,15 @@ public class HeaderRecyclerViewSection extends StatelessSection{
         iHolder.mTextView2.setText(convTime.format(currentItem.getDateStart()) + " - " + convTime.format(currentItem.getDateEnd())
                 + "   |   " + currentItem.getLocation());
     }
+
+    public interface onItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener) {
+        mListener = listener;
+    }
+
+
+
 }

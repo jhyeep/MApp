@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 public class DataCollector {
 
+    Date currentDate = new Date();
     public DataCollector(){ }
 
     // TODO: zach this method is where firebase comes in
@@ -22,10 +23,10 @@ public class DataCollector {
         Date date1 = strToDate.parse("10/12/2018 10:00");
         Date date2 = strToDate.parse("11/12/2018 18:00");
 
-        list.add(new EventsItem("Event 1", date2, date2, "LT1", 10, ""));
-        list.add(new EventsItem("Event 2", date1, date1, "CC14", 5, ""));
-        list.add(new EventsItem("Event 3", date2, date2, "LT5", 99, ""));
-        list.add(new EventsItem("Event 1", date2, date2, "LT2", 3, ""));
+        list.add(new EventsItem("Event 1", date2, date2, "LT1", 10, "Event 1 details"));
+        list.add(new EventsItem("Event 2", date1, date1, "CC14", 5, "Event 2 details"));
+        list.add(new EventsItem("Event 3", date2, date2, "LT5", 123, "Event 3 details"));
+        list.add(new EventsItem("Event 4", date2, date2, "LT2", 3, "Event 4 details"));
 
         return list;
     }

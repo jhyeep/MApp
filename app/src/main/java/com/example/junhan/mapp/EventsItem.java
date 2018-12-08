@@ -18,7 +18,7 @@ public class EventsItem {
         this.dateEnd = dateEnd;
         this.attendance = attendance;
         this.location = location;
-
+        this.desc = desc;
 
     }
 
@@ -46,4 +46,7 @@ public class EventsItem {
         return attendance;
     }
 
+    public String getDesc() {
+        return desc;
+    }
 }
