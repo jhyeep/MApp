@@ -11,35 +11,37 @@
         android:layout_margin="20dp"
         android:background="@android:color/white">
 
-        <!--<ImageView-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:padding="2dp"-->
-        <!--android:layout_marginRight="8dp"/>-->
+        <TextView
+            android:id="@+id/TextAttend"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:autoSizeTextType="uniform"
+            android:layout_marginRight="16dp"
+            android:text="1"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_toEndOf="@id/TextAttend"
             android:text="Line 1"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_toRightOf="@id/TextAttend" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@id/TextAttend"
             android:text="Line 2"
             android:textSize="15sp" />
+
+
 
     </RelativeLayout>
 

@@ -35,6 +35,7 @@ public class HeaderRecyclerViewSection extends StatelessSection{
         DateFormat convDate = new SimpleDateFormat("dd/MM/yyyy");
         DateFormat convTime = new SimpleDateFormat("HH:mm");
 
+        iHolder.mTextViewAttend.setText(Integer.toString(currentItem.getAttendance()));
         iHolder.mTextView1.setText(currentItem.getName());
         iHolder.mTextView2.setText(convTime.format(currentItem.getDateStart()) + " - " + convTime.format(currentItem.getDateEnd())
         + "   |   " + currentItem.getLocation());

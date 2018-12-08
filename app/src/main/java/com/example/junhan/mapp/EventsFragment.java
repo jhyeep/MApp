@@ -34,10 +34,10 @@ public class EventsFragment extends Fragment {
         Date date1 = strToDate.parse("10/12/2018 10:00");
         Date date2 = strToDate.parse("11/12/2018 18:00");
 
-        exampleList.add(new EventsItem("Event 1", date2, date2, "LT1", 0, ""));
-        exampleList.add(new EventsItem("Event 2", date1, date1, "CC14", 0, ""));
-        exampleList.add(new EventsItem("Event 3", date2, date2, "LT5", 0, ""));
-        exampleList.add(new EventsItem("Event 1", date2, date2, "LT2", 0, ""));
+        exampleList.add(new EventsItem("Event 1", date2, date2, "LT1", 10, ""));
+        exampleList.add(new EventsItem("Event 2", date1, date1, "CC14", 5, ""));
+        exampleList.add(new EventsItem("Event 3", date2, date2, "LT5", 200, ""));
+        exampleList.add(new EventsItem("Event 1", date2, date2, "LT2", 3, ""));
 
         return exampleList;
     }
