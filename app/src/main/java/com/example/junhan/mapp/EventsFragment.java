@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
@@ -30,8 +31,8 @@ public class EventsFragment extends Fragment {
         ArrayList<EventsItem> exampleList = new ArrayList<>();
 
         DateFormat strToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date date1 = strToDate.parse("06/12/2018 10:00");
-        Date date2 = strToDate.parse("07/12/2018 18:00");
+        Date date1 = strToDate.parse("10/12/2018 10:00");
+        Date date2 = strToDate.parse("11/12/2018 18:00");
 
         exampleList.add(new EventsItem("Event 1", date2, date2, "LT1", 0, ""));
         exampleList.add(new EventsItem("Event 2", date1, date1, "CC14", 0, ""));
@@ -78,7 +79,7 @@ public class EventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         DateFormat convDate = new SimpleDateFormat("dd/MM/yyyy");
-        HashMap<String, ArrayList<EventsItem>> sectioner = new HashMap<>();
+        TreeMap<String, ArrayList<EventsItem>> sectioner = new TreeMap<>();
         for (EventsItem event : exampleList) {
             String dateStr = convDate.format(event.getDateStart());
             if (!sectioner.containsKey(dateStr)){
@@ -91,17 +92,19 @@ public class EventsFragment extends Fragment {
                 sectioner.put(dateStr,newList);
             }
         }
-//        for (String key : sectioner)
 
-        HeaderRecyclerViewSection firstSection = new HeaderRecyclerViewSection("First Section", exampleList);
-        HeaderRecyclerViewSection secondSection = new HeaderRecyclerViewSection("Second Section", exampleList);
-        HeaderRecyclerViewSection thirdSection = new HeaderRecyclerViewSection("Third Section", exampleList);
+//        HeaderRecyclerViewSection firstSection = new HeaderRecyclerViewSection("First Section", exampleList);
+//        HeaderRecyclerViewSection secondSection = new HeaderRecyclerViewSection("Second Section", exampleList);
+//        HeaderRecyclerViewSection thirdSection = new HeaderRecyclerViewSection("Third Section", exampleList);
 
         SectionedRecyclerViewAdapter sectionAdapter = new SectionedRecyclerViewAdapter();
 
-        sectionAdapter.addSection(firstSection);
-        sectionAdapter.addSection(secondSection);
-        sectionAdapter.addSection(thirdSection);
+        for (String key : sectioner.keySet()) {
+            sectionAdapter.addSection(new HeaderRecyclerViewSection(key, sectioner.get(key)));
+        }
+//        sectionAdapter.addSection(firstSection);
+//        sectionAdapter.addSection(secondSection);
+//        sectionAdapter.addSection(thirdSection);
 
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
