@@ -14,7 +14,7 @@ public class DataCollector {
     Date currentDate = new Date();
     public DataCollector(){ }
 
-    // TODO: zach this method is where firebase comes in
+    // TODO: implement firebase
     // returns a list of ALL events (unsorted)
     public static ArrayList<EventsItem> getAllData() throws ParseException {
         ArrayList<EventsItem> list = new ArrayList<>();

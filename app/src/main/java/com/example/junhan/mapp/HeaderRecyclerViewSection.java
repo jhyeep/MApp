@@ -38,12 +38,13 @@ public class HeaderRecyclerViewSection extends StatelessSection{
     }
     @Override
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ItemViewHolder iHolder = (ItemViewHolder)holder;
+        ItemViewHolder iHolder = (ItemViewHolder) holder;
         EventsItem currentItem = eventList.get(position);
 
         DateFormat convDate = new SimpleDateFormat("dd/MM/yyyy");
         DateFormat convTime = new SimpleDateFormat("HH:mm");
 
+        iHolder.mImageView.setImageResource(R.drawable.ic_plus_blue);
         iHolder.mTextViewAttend.setText(Integer.toString(currentItem.getAttendance()));
         iHolder.mTextView1.setText(currentItem.getName());
         iHolder.mTextView2.setText(convTime.format(currentItem.getDateStart()) + " - " + convTime.format(currentItem.getDateEnd())
@@ -52,12 +53,14 @@ public class HeaderRecyclerViewSection extends StatelessSection{
 
     public interface onItemClickListener {
         void onItemClick(int position);
+        void onCheckClick(int position);
     }
 
     public void setOnItemClickListener(onItemClickListener listener) {
         mListener = listener;
     }
 
-
+    public static void attendCheck(int position) {
+    }
 
 }
