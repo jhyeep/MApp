@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    //TODO: make refresh button do something
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:

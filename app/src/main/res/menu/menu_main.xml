@@ -11,8 +11,10 @@
 
     <item
         android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh"
         android:title="Refresh"
-        app:showAsAction="never"
-        ></item>
+        app:showAsAction="ifRoom">
+
+    </item>
 
 </menu>
