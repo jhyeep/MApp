@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -20,17 +21,17 @@ import java.util.TreeMap;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
-import static android.content.Context.MODE_PRIVATE;
-
 
 public class EventsFragment extends Fragment {
 
+    private SharedPreferences mPreferences;
+    private String sharedPrefFile = "com.example.android.subsharedprefs";
     TreeMap<String, ArrayList<EventsItem>> sectioner;
-    private String sharedPrefFile = "com.example.android.mainsharedprefs";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPreferences = getActivity().getSharedPreferences(sharedPrefFile, 0);
     }
 
     @Nullable
@@ -53,7 +54,7 @@ public class EventsFragment extends Fragment {
             posTracker.add(new EventsItem(key, currentDate, currentDate, "", 0, ""));
             for (EventsItem value : sectioner.get(key)) posTracker.add(value);
 
-            final HeaderRecyclerViewSection sec = new HeaderRecyclerViewSection(key, sectioner.get(key));
+            final HeaderRecyclerViewSection sec = new HeaderRecyclerViewSection(getActivity(), key, sectioner.get(key));
             sectionAdapter.addSection(sec);
             sec.setOnItemClickListener(new HeaderRecyclerViewSection.onItemClickListener() {
                 @Override
@@ -65,13 +66,23 @@ public class EventsFragment extends Fragment {
                 }
 
                 //TODO: make attendance +1 to event in firebase
-                //TODO: make plus icon change to tick icon
-                //TODO: make tick icon stay as tick icon even after app is closed (sharedpref things)
                 @Override
-                public void onCheckClick(int position) {
-                    Toast.makeText(getActivity(), "Marked event as attending.", Toast.LENGTH_SHORT).show();
-//                    HeaderRecyclerViewSection.attendCheck(position);
-
+                public void onCheckClick(View itemView, int position) {
+                    if (mPreferences.getString(posTracker.get(position).getName(), "") == "1")  {
+                        Toast.makeText(getActivity(), "No longer attending event.", Toast.LENGTH_SHORT).show();
+                        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                        preferencesEditor.putString(posTracker.get(position).getName(), "0");
+                        preferencesEditor.apply();
+                        ImageView image = itemView.findViewById(R.id.imageView);
+                        image.setImageResource(R.drawable.ic_plus_blue);
+                    } else {
+                        Toast.makeText(getActivity(), "Marked event as attending.", Toast.LENGTH_SHORT).show();
+                        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                        preferencesEditor.putString(posTracker.get(position).getName(), "1");
+                        preferencesEditor.apply();
+                        ImageView image = itemView.findViewById(R.id.imageView);
+                        image.setImageResource(R.drawable.ic_check);
+                    }
                 }
             });
         }

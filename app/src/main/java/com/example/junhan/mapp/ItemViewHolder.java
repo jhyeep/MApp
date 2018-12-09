@@ -1,5 +1,6 @@
 package com.example.junhan.mapp;
 
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +12,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
     public TextView mTextViewAttend;
     public ImageView mImageView;
 
-    public ItemViewHolder(View itemView, final HeaderRecyclerViewSection.onItemClickListener listener) {
+    public ItemViewHolder(final View itemView, final HeaderRecyclerViewSection.onItemClickListener listener) {
         super(itemView);
         mTextView1 = itemView.findViewById(R.id.textView);
         mTextView2 = itemView.findViewById(R.id.textView2);
@@ -36,7 +37,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
                 if (listener != null){
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION){
-                        listener.onCheckClick(position);
+                        listener.onCheckClick(itemView, position);
                     }
                 }
             }

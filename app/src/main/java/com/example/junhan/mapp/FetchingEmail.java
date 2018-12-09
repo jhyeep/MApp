@@ -25,6 +25,7 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 
+//TODO: make this work
 public class FetchingEmail {
 
     public static void fetch(String pop3Host, String storeType, String user,

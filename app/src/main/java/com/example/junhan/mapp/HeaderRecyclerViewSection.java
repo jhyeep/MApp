@@ -1,5 +1,7 @@
 package com.example.junhan.mapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -13,11 +15,14 @@ public class HeaderRecyclerViewSection extends StatelessSection{
     private String title;
     public ArrayList<EventsItem> eventList;
     private onItemClickListener mListener;
+    private SharedPreferences mPreferences;
+    private String sharedPrefFile = "com.example.android.subsharedprefs";
 
-    HeaderRecyclerViewSection(String title, ArrayList<EventsItem> eventList) {
+    HeaderRecyclerViewSection(Context context, String title, ArrayList<EventsItem> eventList) {
         super(R.layout.events_header, R.layout.event_item);
         this.title = title;
         this.eventList = eventList;
+        mPreferences = context.getSharedPreferences(sharedPrefFile, 0);
     }
     @Override
     public int getContentItemsTotal() {
@@ -44,7 +49,9 @@ public class HeaderRecyclerViewSection extends StatelessSection{
         DateFormat convDate = new SimpleDateFormat("dd/MM/yyyy");
         DateFormat convTime = new SimpleDateFormat("HH:mm");
 
-        iHolder.mImageView.setImageResource(R.drawable.ic_plus_blue);
+        if (mPreferences.getString(currentItem.getName(), "") == "1")iHolder.mImageView.setImageResource(R.drawable.ic_check);
+        else iHolder.mImageView.setImageResource(R.drawable.ic_plus_blue);
+
         iHolder.mTextViewAttend.setText(Integer.toString(currentItem.getAttendance()));
         iHolder.mTextView1.setText(currentItem.getName());
         iHolder.mTextView2.setText(convTime.format(currentItem.getDateStart()) + " - " + convTime.format(currentItem.getDateEnd())
@@ -53,14 +60,12 @@ public class HeaderRecyclerViewSection extends StatelessSection{
 
     public interface onItemClickListener {
         void onItemClick(int position);
-        void onCheckClick(int position);
+        void onCheckClick(View view, int position);
     }
 
     public void setOnItemClickListener(onItemClickListener listener) {
         mListener = listener;
     }
 
-    public static void attendCheck(int position) {
-    }
 
 }
