@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "265834951111",
+    "firebase_url": "https://mapp-9f5af.firebaseio.com",
+    "project_id": "mapp-9f5af",
+    "storage_bucket": "mapp-9f5af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265834951111:android:2881190878d16154",
+        "android_client_info": {
+          "package_name": "com.example.junhan.mapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265834951111-gaf0l6cmsuablk7av7lf19j52tp6e49c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.junhan.mapp",
+            "certificate_hash": "1a59f7d7a51e093de4bbba0332f88f51f7a2916c"
+          }
+        },
+        {
+          "client_id": "265834951111-5415b7fu7irug9i58ncbqd0s7b9vpu85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIjOXtwfFxfqPdGHxb-VqH_hBVSwt15JM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265834951111-5415b7fu7irug9i58ncbqd0s7b9vpu85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

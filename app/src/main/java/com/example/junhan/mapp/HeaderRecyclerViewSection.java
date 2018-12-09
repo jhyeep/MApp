@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 
 public class HeaderRecyclerViewSection extends StatelessSection{
@@ -46,16 +49,29 @@ public class HeaderRecyclerViewSection extends StatelessSection{
         ItemViewHolder iHolder = (ItemViewHolder) holder;
         EventsItem currentItem = eventList.get(position);
 
-        DateFormat convDate = new SimpleDateFormat("dd/MM/yyyy");
-        DateFormat convTime = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat convTime = new SimpleDateFormat("HH:mm"); //convTime.format
+        SimpleDateFormat strToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm"); //strToDate.parse
+
+//        try {
+//            String dateStart = convDate.format(strToDate.parse(currentItem.getDateStart()));
+//            String dateEnd = convDate.format(strToDate.parse(currentItem.getDateEnd()));
+//            String timeStart = convTime.format(strToDate.parse(currentItem.getDateStart()));
+//            String timeEnd = convTime.format(strToDate.parse(currentItem.getDateEnd()));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
         if (mPreferences.getString(currentItem.getName(), "") == "1")iHolder.mImageView.setImageResource(R.drawable.ic_check);
         else iHolder.mImageView.setImageResource(R.drawable.ic_plus_blue);
 
         iHolder.mTextViewAttend.setText(Integer.toString(currentItem.getAttendance()));
         iHolder.mTextView1.setText(currentItem.getName());
-        iHolder.mTextView2.setText(convTime.format(currentItem.getDateStart()) + " - " + convTime.format(currentItem.getDateEnd())
-                + "   |   " + currentItem.getLocation());
+        try {
+            iHolder.mTextView2.setText(convTime.format(strToDate.parse(currentItem.getDateStart())) + " - " + convTime.format(strToDate.parse(currentItem.getDateEnd()))
+                    + "   |   " + currentItem.getLocation());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public interface onItemClickListener {

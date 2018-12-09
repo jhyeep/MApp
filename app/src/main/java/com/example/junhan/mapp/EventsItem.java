@@ -7,11 +7,11 @@ public class EventsItem {
     private int attendance;
     private String name;
     private String location;
-    private Date dateStart;
-    private Date dateEnd;
+    private String dateStart;
+    private String dateEnd;
     private String desc;
 
-    public EventsItem(String name, Date dateStart, Date dateEnd, String location, int attendance, String desc){
+    public EventsItem(String name, String dateStart, String dateEnd, String location, int attendance, String desc){
 
         this.name = name;
         this.dateStart = dateStart; //stores both date and time, refer to DataCollector for usage
@@ -22,31 +22,53 @@ public class EventsItem {
 
     }
 
-    public String getName(){
-        return name;
-    }
+    public EventsItem(){}
 
-    public Date getDateStart() {
-        return dateStart;
-    }
-
-    public Date getDateEnd() {
-        return dateEnd;
-    }
-
-    public String getLocation() {
-        return location;
+    public int getAttendance() {
+        return attendance;
     }
 
     public void setAttendance(int attendance) {
         this.attendance = attendance;
     }
 
-    public int getAttendance() {
-        return attendance;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public String getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public String getDesc() {
         return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

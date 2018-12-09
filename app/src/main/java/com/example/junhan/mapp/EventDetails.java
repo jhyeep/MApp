@@ -4,7 +4,20 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import android.util.Log;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 // TODO: make activity_event_details.xml a proper display screen
 
@@ -26,8 +39,8 @@ public class EventDetails extends AppCompatActivity {
         eventDetails = findViewById(R.id.eventDetails);
         String blah = intent.getStringExtra("CURRENT_ITEM");
         eventDetails.setText(blah);
+
+
     }
-
-
 }
 
