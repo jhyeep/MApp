@@ -1,16 +1,13 @@
 package com.example.junhan.mapp;
 
+import com.example.junhan.mapp.EmailRegex;
+
 import org.jsoup.Jsoup;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -18,18 +15,38 @@ import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FlagTerm;
 
-//TODO: make this work
 public class FetchingEmail {
 
-    public static void fetch(String pop3Host, String storeType, String user,
-                             String password) {
+    public static HashMap<String,String[]> getEmails(String user,
+                                                     String password) {
+        String pop3Host = "";
+        String storeType = "pop3";
+
+        if (user.contains("@gmail.com")){
+            pop3Host = "smtp.gmail.com";
+        } //TODO ADD FOR SUTD
+
+
+        HashMap<String,String[]> fetched = null;
+        try {
+            fetched = fetch(pop3Host, storeType, user, password);
+        } catch (java.lang.NoClassDefFoundError e ){
+            System.out.println("cmi");
+            fetched = null;
+        }
+        return fetched;
+    }
+
+    public static HashMap<String,String[]> fetch(String pop3Host, String storeType, String user,
+                                                 String password) {
+        HashMap<String,String[]> allText = new HashMap<String,String[]>();
         try {
             // create properties field
             Properties properties = new Properties();
@@ -47,19 +64,33 @@ public class FetchingEmail {
 
             // create the folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_WRITE);
+            emailFolder.open(Folder.READ_ONLY);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     System.in));
 
             // retrieve the messages from the folder in an array and print it
             Message[] messages = emailFolder.getMessages();
+
+            //Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), true));
+            //FlagTerm ft = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
+            //emailFolder.open(Folder.READ_ONLY);//set access type of Inbox
+            //Message[] messages = emailFolder.search(ft);
+
             System.out.println("messages.length---" + messages.length);
+
+
+
             for (int i = 0; i < messages.length; i++) {
                 Message message = messages[i];
                 System.out.println("---------------------------------");
                 System.out.println("MESSAGE " + i);
-                writePart(message);
+                String[] text = writePart(message);
+                if (text[0].length() > 0 && text[1].length() > 0){
+                    String[] info = EmailRegex.getInfo(text[1]);
+                    if (info != null)
+                        allText.put(text[0],info);
+                }
 //                String line = reader.readLine();
 //                System.out.println(line);
 //                if ("YES".equals(line)) {
@@ -83,17 +114,40 @@ public class FetchingEmail {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return allText;
     }
     public static void main(String[] args) {
 
-        String host = "pop.gmail.com";// change accordingly
+        String host = "smtp.gmail.com" ;// change accordingly
         String mailStoreType = "pop3";
         String username = "Marauder.mApp36@gmail.com";// change accordingly
         String password = "Group3-6";// change accordingly
 
         //Call method fetch
-        fetch(host, mailStoreType, username, password);
+        HashMap<String,String[]> fetched = null;
+        try {
+            fetched = fetch(host, mailStoreType, username, password);
+        } catch (java.lang.NoClassDefFoundError e ){
+            System.out.println("cmi");
+            fetched = null;
+        }
 
+        // just for printing
+        /*
+        Iterator it = fetched.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println("--------------------------------------------------------------");
+            System.out.println(pair.getKey());
+            String[] info =  fetched.get(pair.getKey());
+            for (String i : info){
+                System.out.println(i);
+            }
+
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+        */
     }
 
     /*
@@ -101,60 +155,77 @@ public class FetchingEmail {
      * based on which, it processes and
      * fetches the content of the message
      */
-    public static void writePart(Part p) throws Exception {
+    public static String[] writePart(Part p) throws Exception {
+        String Subject = "";
         if (p instanceof Message)
             //Call method writeEnvelope
-            writeEnvelope((Message) p);
+            Subject = writeEnvelope((Message) p);
 
-        System.out.println("----------------------------");
-        System.out.println("CONTENT-TYPE: " + p.getContentType());
+//        System.out.println("----------------------------");
+//        System.out.println("CONTENT-TYPE: " + p.getContentType());
 
+        String result = "";
         if (p.isMimeType("text/plain")) {
-            String result = p.getContent().toString();
-            System.out.println(result);
+            result = p.getContent().toString();
+            // System.out.println(result);
         } else if (p.isMimeType("multipart/*")) {
-            String result = "";
+            result = "";
             MimeMultipart mimeMultipart = (MimeMultipart) p.getContent();
             int count = mimeMultipart.getCount();
             for (int i = 0; i < count; i++) {
                 BodyPart bodyPart = mimeMultipart.getBodyPart(i);
                 if (bodyPart.isMimeType("text/plain")) {
                     result = result + "\n" + bodyPart.getContent();
-                    System.out.println(result);
+                    //System.out.println(result);
                     break;  //without break same text appears twice in my tests
                 } else if (bodyPart.isMimeType("text/html")) {
                     String html = (String) bodyPart.getContent();
                     result = result + "\n" + Jsoup.parse(html).text();
-                    System.out.println(result);
+                    //System.out.println(result);
                 }
             }
         }
+        /*
+        System.out.println("PRINTED BY ME");
+        System.out.println(Subject + "\n");
+        System.out.println("PRINTED BY ME");
+        System.out.println(result);
+        */
+        String[] text = {Subject, result};
+        return text;
     }
 
     /*
      * This method would print FROM,TO and SUBJECT of the message
      */
-    public static void writeEnvelope(Message m) throws Exception {
+    public static String writeEnvelope(Message m) throws Exception {
 //        System.out.println("This is the message envelope");
 //        System.out.println("---------------------------");
         Address[] a;
 
         // FROM
+        /*
         if ((a = m.getFrom()) != null) {
             for (int j = 0; j < a.length; j++)
                 System.out.println("FROM: " + a[j].toString());
         }
+        */
 
-        //TO
-        if ((a = m.getRecipients(Message.RecipientType.TO)) != null) {
-            for (int j = 0; j < a.length; j++)
-                System.out.println("TO: " + a[j].toString());
-        }
+        // TO
+//        if ((a = m.getRecipients(Message.RecipientType.TO)) != null) {
+//            for (int j = 0; j < a.length; j++)
+//                System.out.println("TO: " + a[j].toString());
+//        }
 
         // SUBJECT
+        /*
         if (m.getSubject() != null)
             System.out.println("SUBJECT: " + m.getSubject());
-
+        */
+        if (m.getSubject() != null)
+            return m.getSubject();
+        else
+            return "";
     }
 
 }
