@@ -9,15 +9,17 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
+        android:id="@+id/profilePic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_profile_round"/>
 
     <TextView
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="16sp"
-        android:text="Profile Name"
+        android:text="Marauder.mApp36@gmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/white"
         android:textSize="16sp" />

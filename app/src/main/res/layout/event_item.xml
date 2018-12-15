@@ -12,48 +12,57 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp">
 
-        <TextView
-            android:id="@+id/textAttend"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:autoSizeTextType="uniform"
-            android:layout_marginRight="16dp"
-            android:text="10"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_toEndOf="@id/imageView3"/>
-
-        <TextView
-            android:layout_width="50dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textAttend"
-            android:gravity="center"
-            android:text="GOING"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/imageView3"/>
+            android:id="@+id/attendance"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/textAttend"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:autoSizeTextType="uniform"
+                android:layout_marginRight="16dp"
+                android:text="10"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textAttend"
+                android:gravity="center"
+                android:text="GOING"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@id/textAttend"
+            android:layout_toEndOf="@id/attendance"
             android:text="Line 1"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:layout_toRightOf="@id/textAttend" />
+            android:layout_toRightOf="@id/attendance" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_toRightOf="@id/textAttend"
+            android:layout_toRightOf="@id/attendance"
+            android:layout_marginTop="1dp"
             android:text="Line 2"
             android:textSize="16sp"
-            android:layout_toEndOf="@id/textAttend" />
+            android:layout_toEndOf="@id/attendance" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -63,23 +72,7 @@
             android:layout_centerInParent="true"
             android:layout_alignParentRight="true"/>
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:scaleType="fitXY"
-            android:layout_alignParentLeft="true" />
-
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="10dp"
-        android:layout_height="82dp"
-        android:layout_alignParentStart="true"
-        android:scaleType="fitXY"
-        android:layout_alignParentLeft="true" />
 
 </android.support.v7.widget.CardView>
 

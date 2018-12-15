@@ -1,14 +1,7 @@
 package com.example.junhan.mapp;
 
-import android.support.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.TreeMap;
+
 
 public class DataCollector {
 
@@ -27,25 +21,7 @@ public class DataCollector {
     public DataCollector(){
     }
 
-
-    // returns a list of ALL events (unsorted)
-//    public static ArrayList<EventsItem> getAllData() throws ParseException {
-//        ArrayList<EventsItem> list = new ArrayList<>();
-//
-//        DateFormat strToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-//        Date date1 = strToDate.parse("10/12/2018 10:00");
-//        Date date2 = strToDate.parse("11/12/2018 18:00");
-//
-//        list.add(new EventsItem("Event 1", "11/12/2018 18:00", "11/12/2018 18:00", "LT1", 10, "Event 1 details"));
-//        list.add(new EventsItem("Event 2", "11/12/2018 18:00", "11/12/2018 18:00", "CC14", 5, "Event 2 details"));
-//        list.add(new EventsItem("Event 3", "11/12/2018 18:00", "11/12/2018 18:00", "LT5", 123, "Event 3 details"));
-//        list.add(new EventsItem("Event 4", "10/12/2018 10:00", "10/12/2018 10:00", "LT2", 3, "Event 4 details"));
-//
-//        return list;
-//    }
-
-
-    // filters out expired events
+    // takes list of events, sorts them by date, removes expired events, then returns as arraylist
     public static ArrayList<EventsItem> getData(ArrayList<EventsItem> list) throws ParseException {
         final SimpleDateFormat strToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         ArrayList<EventsItem> events = list;
@@ -53,7 +29,7 @@ public class DataCollector {
             @Override
             public int compare(EventsItem o1, EventsItem o2) {
                 try {
-                    return strToDate.parse(o1.getDateStart()).compareTo(strToDate.parse(o2.getDateStart()));
+                    return strToDate.parse(o1.getDateStart()).compareTo(strToDate.parse(o2.getDateStart())); //converts date from String to Date, then compares
                 } catch (ParseException e) {
                     return 0;
                 }

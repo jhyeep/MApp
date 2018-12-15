@@ -5,18 +5,16 @@ import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 
+
 public class HeaderRecyclerViewSection extends StatelessSection{
-    private static final String TAG = HeaderRecyclerViewSection.class.getSimpleName();
     private String title;
-    public ArrayList<EventsItem> eventList;
+    private ArrayList<EventsItem> eventList;
     private onItemClickListener mListener;
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.android.subsharedprefs";
@@ -51,15 +49,6 @@ public class HeaderRecyclerViewSection extends StatelessSection{
 
         SimpleDateFormat convTime = new SimpleDateFormat("HH:mm"); //convTime.format
         SimpleDateFormat strToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm"); //strToDate.parse
-
-//        try {
-//            String dateStart = convDate.format(strToDate.parse(currentItem.getDateStart()));
-//            String dateEnd = convDate.format(strToDate.parse(currentItem.getDateEnd()));
-//            String timeStart = convTime.format(strToDate.parse(currentItem.getDateStart()));
-//            String timeEnd = convTime.format(strToDate.parse(currentItem.getDateEnd()));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
         if (mPreferences.getString(currentItem.getName(), "") == "1")iHolder.mImageView.setImageResource(R.drawable.ic_check);
         else iHolder.mImageView.setImageResource(R.drawable.ic_plus_blue);

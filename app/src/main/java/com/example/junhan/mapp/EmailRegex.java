@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//TODO: cleanup
 public class EmailRegex {
 
     public static Map<String, String> all = new HashMap<String, String>(){{
@@ -32,8 +33,12 @@ public class EmailRegex {
         put("ISTD office", "2.206");
     }};
 
+    public static Map<String, String> getLocations(){
+        return all;
+    }
+
     //todo get rid of this when app done
-    public static void main(String args[]){
+    public static void main(String args[]) throws ParseException {
         String test = "Dear Students,\n" +
                 " \n" +
                 "ISTD will hold a briefing session to share with you information about the new requirements for each track. Apart from the pillar curriculum, Prof Tony Quek (Acting HOP) will also share with you some new initiatives (e.g. labs, working space) in ISTD. No registration is required for this event, for those who are available and are keen to find out more about the above-mentioned items, please join us at the event with the details  below:\n" +
@@ -75,6 +80,9 @@ public class EmailRegex {
         }
         */
         getInfo(tests);
+        SimpleDateFormat strtodate = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat convDate = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println(convDate.format(strtodate.parse("13 jan 2018")));
     }
 
     public static String[] getInfo(String str){

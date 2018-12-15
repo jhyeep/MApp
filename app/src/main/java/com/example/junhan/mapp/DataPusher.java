@@ -1,26 +1,12 @@
 package com.example.junhan.mapp;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.support.constraint.Constraints.TAG;
 
-//TODO: *** class for pushing events to firebase ***
-// remember to initialize an instance of the class before using its methods
+// class for pushing events to firebase
 public class DataPusher {
 
     FirebaseDatabase database;
@@ -32,6 +18,9 @@ public class DataPusher {
     }
 
     // sends new event to firebase, input: EventsItem
+    /*
+    NOTE: dateStart and dateEnd are
+     */
     public void sendData(EventsItem event){
         String name = event.getName();
         String dateStart = event.getDateStart();
@@ -48,7 +37,7 @@ public class DataPusher {
         myRef.child(name).child("desc").setValue(desc);
     }
 
-    // sends new event to firebase, input: bunch of attributes
+    // sends new event to firebase, input: bunch of attributes of String type
     public void sendData(String name, String dateStart, String dateEnd, String location, int attendance, String desc){
         myRef.child(name).child("name").setValue(name);
         myRef.child(name).child("dateStart").setValue(dateStart);

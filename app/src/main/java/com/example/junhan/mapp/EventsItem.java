@@ -1,7 +1,6 @@
 package com.example.junhan.mapp;
 
-import java.util.Date;
-
+// self-explanatory class for an event object
 public class EventsItem {
 
     private int attendance;
@@ -14,15 +13,13 @@ public class EventsItem {
     public EventsItem(String name, String dateStart, String dateEnd, String location, int attendance, String desc){
 
         this.name = name;
-        this.dateStart = dateStart; //stores both date and time, refer to DataCollector for usage
+        this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.attendance = attendance;
         this.location = location;
         this.desc = desc;
 
     }
-
-    public EventsItem(){}
 
     public int getAttendance() {
         return attendance;
@@ -52,23 +49,11 @@ public class EventsItem {
         return dateStart;
     }
 
-    public void setDateStart(String dateStart) {
-        this.dateStart = dateStart;
-    }
-
     public String getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(String dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
     public String getDesc() {
         return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 }

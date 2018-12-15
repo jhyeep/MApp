@@ -32,10 +32,10 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        name = (EditText)findViewById(R.id.username);
-        pwd = (EditText)findViewById(R.id.password);
-        loginButton = (Button)findViewById(R.id.login_button);
-        regButton = (TextView)findViewById(R.id.goToReg);
+        name = findViewById(R.id.username);
+        pwd = findViewById(R.id.password);
+        loginButton = findViewById(R.id.login_button);
+        regButton = findViewById(R.id.goToReg);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +78,11 @@ public class LoginPage extends AppCompatActivity {
         Log.i("button", "buttonpressed");
         if (true){
         //if (FetchingEmail.getEmails(userName, userPassword) != null) {  TODO LAT when firebase part done
-            if (userName.equals("firebase")) { // TODO: ZAC change if statement to check if usersame in firebase
+            if (userName.equals("firebase") | userName.equals("marauder.mapp36@gmail.com")) { // TODO: ZAC change if statement to check if usersame in firebase
                 //Log.i("button", "firebase ok");
                 // ZAC get password in firebase
 
-                if (userPassword.equals("firePassword")) {  // TODO: ZAC change if statement to check if password match username
+                if (userPassword.equals("firePassword") | userPassword.equals("Group3-6") ) {  // TODO: ZAC change if statement to check if password match username
                     //Log.i("button", "pwd ok")
 
                     uname = userName;

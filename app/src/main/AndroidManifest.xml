@@ -43,12 +43,15 @@
         <activity
             android:name=".EventDetails"
             android:parentActivityName=".MainActivity"
-            android:label="Create Event"
+            android:label="Event Details"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDzJUYfFzktnpic_xBUCvR1Hh44Bb95vL0"/>
+        <uses-library android:name="com.google.android.maps"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
     </application>
 
