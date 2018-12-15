@@ -1,7 +1,12 @@
 package com.example.junhan.mapp;
 
-// self-explanatory class for an event object
 public class EventsItem {
+
+    /*
+    Everything is self-explanatory and obvious, except for dateStart and dateEnd. Both the time and date are stored in one attribute,
+    eg. "15/12/2018 12:30", which is why in all the code that needs to retrieve the date/time alone, you will see a lot of SimpleDateFormat
+    usage where the String is converted to a Date and back to a String.
+     */
 
     private int attendance;
     private String name;

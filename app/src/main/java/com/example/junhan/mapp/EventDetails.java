@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-
 // activity for event details page (when user clicks on card in events list
 public class EventDetails extends AppCompatActivity {
     TextView eventDetails;

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences mPreferences;
@@ -41,15 +40,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
-
         //start pushing events from email
         emailSend();
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        profileName = findViewById(R.id.profileName);
-//        profileName.setText(mPreferences.getString("savedName", ""));
 
         //Sidebar
         drawer = findViewById(R.id.drawer_layout);
@@ -64,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_map);
         }
-//        profileName = findViewById(R.id.profileName);
-//        profileName.setText(mPreferences.getString("savedName", ""));
     }
 
     //Sidebar menu items
@@ -80,10 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setTitle("Events");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventsFragment()).commit();
                 break;
-//            case R.id.nav_friends:
-//                setTitle("Friends");
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FriendsFragment()).commit();
-//                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -109,26 +99,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    //TODO: make refresh button do something (or just remove this)
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
+                // refresh button doesn't do anything admittedly, but is a placeholder for other future options
                 Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.add_event:
                 Intent intent = new Intent(this, CreateEvent.class);
                 startActivity(intent);
                 return true;
-            //more cases if needed
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void emailSend() {
         DataPusher dp = new DataPusher();
-        String username = mPreferences.getString("savedName", "");
+        String username = mPreferences.getString("savedName", ""); //retrieved from login page
         String password = mPreferences.getString("savedPassword", "");
         HashMap<String, String[]> fetched = FetchingEmail.getEmails(username, password);
+
         if (fetched == null) {
             Toast.makeText(this, "Error fetching emails", Toast.LENGTH_SHORT).show();
         } else {

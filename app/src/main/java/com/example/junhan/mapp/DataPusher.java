@@ -5,7 +5,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-
 // class for pushing events to firebase
 public class DataPusher {
 

@@ -28,7 +28,6 @@ import java.util.TreeMap;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
-
 public class EventsFragment extends Fragment {
 
     FirebaseDatabase database;
@@ -95,9 +94,10 @@ public class EventsFragment extends Fragment {
                     for (final String key : sectioner.keySet()) { //remember sectioner is the hashmap of dates with value being an arraylist of events
 
                         /*
-                        When user clicks on a card, the code uses the position of the clicked item to determine what event it is.
-                        However, while this position number is inaccurate as it includes the header as well. Hence the posTracker
-                        which is a list of sorted events. Actions can then refer to particular events by using posTracker.get[position].
+                        When user clicks on a card, normally the position of the clicked item is used to determine what event it is (see
+                        ItemViewHolder for details on how to get the position of items). However, while this position number is inaccurate
+                        for our app as it includes the header as well. Hence we create a posTracker list with all the events and then
+                        refer to particular events by using posTracker.get[position].
                          */
                         posTracker.add(new EventsItem(key, currentDate, currentDate, "", 0, ""));
                         for (EventsItem value : sectioner.get(key)) posTracker.add(value); //for event in arraylist of events, add it to posTracker

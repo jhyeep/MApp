@@ -19,7 +19,6 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 
-
 //TODO: clean up
 public class FetchingEmail {
 

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//TODO: clean up
 public class LoginPage extends AppCompatActivity {
 
     private EditText name;

@@ -40,7 +40,7 @@ import java.util.Enumeration;
  * A placeholder fragment containing a simple view.
  */
 
-
+//TODO: clean up
 public class MapFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference myRef;
