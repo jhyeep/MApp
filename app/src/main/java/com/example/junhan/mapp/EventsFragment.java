@@ -102,7 +102,7 @@ public class EventsFragment extends Fragment {
                         posTracker.add(new EventsItem(key, currentDate, currentDate, "", 0, ""));
                         for (EventsItem value : sectioner.get(key)) posTracker.add(value); //for event in arraylist of events, add it to posTracker
 
-                        final HeaderRecyclerViewSection sec = new HeaderRecyclerViewSection(getActivity(), key, sectioner.get(key));
+                        final HeaderRecyclerViewSection sec = new HeaderRecyclerViewSection(getContext(), key, sectioner.get(key));
                         sectionAdapter.addSection(sec);
                         mRecyclerView.setAdapter(sectionAdapter);
                         mRecyclerView.setHasFixedSize(true);

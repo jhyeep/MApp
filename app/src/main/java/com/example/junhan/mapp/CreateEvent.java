@@ -68,7 +68,6 @@ public class CreateEvent extends AppCompatActivity {
         makeDropDown(monArray, month);
         makeDropDown(yearArray, year);
 
-
         createEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

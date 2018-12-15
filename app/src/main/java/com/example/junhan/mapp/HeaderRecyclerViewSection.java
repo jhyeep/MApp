@@ -22,7 +22,7 @@ public class HeaderRecyclerViewSection extends StatelessSection{
         super(R.layout.events_header, R.layout.event_item);
         this.title = title;
         this.eventList = eventList;
-        mPreferences = context.getSharedPreferences(sharedPrefFile, 0);
+        mPreferences = context.getSharedPreferences(sharedPrefFile, context.MODE_PRIVATE);
     }
 
     @Override
