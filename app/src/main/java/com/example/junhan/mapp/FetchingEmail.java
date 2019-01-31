@@ -19,7 +19,6 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 
-//TODO: clean up
 public class FetchingEmail {
 
     // main method for getting emails
@@ -52,27 +51,17 @@ public class FetchingEmail {
             properties.put("mail.pop3.port", "995");
             properties.put("mail.pop3.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
-            // emailSession.setDebug(true);
-
-            // create the POP3 store object and connect with the pop server
             Store store = emailSession.getStore("pop3s");
 
             store.connect(pop3Host, user, password);
 
-            // create the folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     System.in));
 
-            // retrieve the messages from the folder in an array and print it
             Message[] messages = emailFolder.getMessages();
-
-            //Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), true));
-            //FlagTerm ft = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
-            //emailFolder.open(Folder.READ_ONLY);//set access type of Inbox
-            //Message[] messages = emailFolder.search(ft);
 
             for (int i = 0; i < messages.length; i++) {
                 Message message = messages[i];
@@ -84,7 +73,6 @@ public class FetchingEmail {
                 }
             }
 
-            // close the store and folder objects
             emailFolder.close(false);
             store.close();
 
@@ -109,7 +97,6 @@ public class FetchingEmail {
     public static String[] writePart(Part p) throws Exception {
         String Subject = "";
         if (p instanceof Message)
-            //Call method writeEnvelope
             Subject = writeEnvelope((Message) p);
 
         String result = "";
@@ -134,9 +121,6 @@ public class FetchingEmail {
         return text;
     }
 
-    /*
-     * This method would print FROM,TO and SUBJECT of the message
-     */
     public static String writeEnvelope(Message m) throws Exception {
         Address[] a;
 

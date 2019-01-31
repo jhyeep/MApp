@@ -19,14 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="16sp"
-        android:text="Marauder.mApp36@gmail.com"
+        android:text="marauder.mapp36@gmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
-
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Email@email.com"/>-->
 
 </LinearLayout>

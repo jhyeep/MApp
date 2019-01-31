@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//TODO: clean up
 public class LoginPage extends AppCompatActivity {
 
     private EditText name;
@@ -53,16 +52,6 @@ public class LoginPage extends AppCompatActivity {
         name.setText(Username);
         pwd.setText(Password);
 
-
-
-        /*
-        regButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginPage.this, RegisterPage.class));
-            }
-        });
-        */
     }
 
     @Override
@@ -78,13 +67,9 @@ public class LoginPage extends AppCompatActivity {
     private void validate(String userName, String userPassword){
         Log.i("button", "buttonpressed");
         if (true){
-        //if (FetchingEmail.getEmails(userName, userPassword) != null) {  TODO LAT when firebase part done
-            if (userName.equals("firebase") | userName.equals("marauder.mapp36@gmail.com")) { // TODO: ZAC change if statement to check if usersame in firebase
-                //Log.i("button", "firebase ok");
-                // ZAC get password in firebase
+            if (userName.equals("firebase") | userName.equals("marauder.mapp36@gmail.com")) {
 
-                if (userPassword.equals("firePassword") | userPassword.equals("Group3-6") ) {  // TODO: ZAC change if statement to check if password match username
-                    //Log.i("button", "pwd ok")
+                if (userPassword.equals("firePassword") | userPassword.equals("Group3-6") ) {
 
                     uname = userName;
                     upassword = userPassword;

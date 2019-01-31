@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-//TODO: clean up
 // Create event activity where user submits event's details to firebase
 public class CreateEvent extends AppCompatActivity {
     EditText title;
@@ -103,7 +102,6 @@ public class CreateEvent extends AppCompatActivity {
             ans = true;
         }
 
-        // todo check if date passed
         return ans;
     }
 

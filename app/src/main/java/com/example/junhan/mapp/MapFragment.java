@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.junhan.mapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -22,15 +20,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -40,7 +33,6 @@ import java.util.Enumeration;
  * A placeholder fragment containing a simple view.
  */
 
-//TODO: clean up
 public class MapFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -176,46 +168,15 @@ public class MapFragment extends Fragment {
                 // For zooming automatically to the location of the marker
 
                 Context context = getActivity().getApplicationContext();
-//                Drawable drawable = context.getResources().getDrawable(R.drawable.b2l5fixlres);
-//                Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+
                 LatLngBounds Building2Bounds = new LatLngBounds(
                         new LatLng(1.340542, 103.961791),       // South west corner
                         new LatLng(1.341437, 103.963324));
 
                 googleMap.setLatLngBoundsForCameraTarget(Building2Bounds);
-//                GroundOverlayOptions SUTDMAP = new GroundOverlayOptions()
-//                        .image(BitmapDescriptorFactory.fromBitmap(bitmap))
-//                        .positionFromBounds(Building2Bounds);
-//                googleMap.addGroundOverlay(SUTDMAP);
+
             }
         });
-
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                eventList.clear();
-//                SimpleDateFormat format = new SimpleDateFormat();
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    String name = ds.child("name").getValue().toString();
-//                    String location = ds.child("location").getValue().toString();
-//                    int attendance = ((Long) ds.child("attendance").getValue()).intValue();
-//                    String desc = ds.child("desc").getValue().toString();
-//                    String dateStart = ds.child("dateStart").getValue().toString();
-//                    String dateEnd = ds.child("dateEnd").getValue().toString();
-//                    EventsItem event = new EventsItem(name, dateStart, dateEnd, location, attendance, desc);
-//                    eventList.add(event);
-//
-//                    for (EventsItem eventi : eventList){
-//                        String locationi = (eventi.getLocation());
-//                        addMarker(locationi);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//            }
-//        });
 
 
 
