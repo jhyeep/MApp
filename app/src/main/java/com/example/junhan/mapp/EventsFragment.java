@@ -65,12 +65,18 @@ public class EventsFragment extends Fragment {
 
                 // firebase data are event attributes only, we put these attributes in a new event and stores the created event in eventList
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String name = ds.child("name").getValue().toString();
-                    String location = ds.child("location").getValue().toString();
-                    int attendance = ((Long) ds.child("attendance").getValue()).intValue();
-                    String desc = ds.child("desc").getValue().toString();
-                    String dateStart = ds.child("dateStart").getValue().toString();
-                    String dateEnd = ds.child("dateEnd").getValue().toString();
+                    String name = "0";
+                    String dateStart = "0";
+                    String dateEnd = "0";
+                    String location = "0";
+                    int attendance = 0;
+                    String desc = "0";
+                    if (ds.child("name").exists()) { name = ds.child("name").getValue().toString(); }
+                    if (ds.child("location").exists()) { location = ds.child("location").getValue().toString();}
+                    if (ds.child("attendance").exists()) { attendance = ((Long) ds.child("attendance").getValue()).intValue(); }
+                    if (ds.child("desc").exists()) { desc = ds.child("desc").getValue().toString(); }
+                    if (ds.child("dateStart").exists()) { dateStart = ds.child("dateStart").getValue().toString(); }
+                    if (ds.child("dateEnd").exists()) { dateEnd = ds.child("dateEnd").getValue().toString(); }
                     EventsItem event = new EventsItem(name, dateStart, dateEnd, location, attendance, desc);
                     eventList.add(event);
 
